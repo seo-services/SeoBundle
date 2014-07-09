@@ -72,6 +72,13 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('form_group')->defaultValue('form.group_seo')->end()
                     ->end()
                 ->end()
+                ->arrayNode('mapping')
+                    ->addDefaultsIfNotSet()
+                    ->canBeEnabled()
+                    ->children()
+                        // todo[max] add mapping pass configuration
+                    ->end()
+                ->end()
             ->end()
         ;
 

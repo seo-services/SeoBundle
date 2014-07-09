@@ -70,6 +70,10 @@ class CmfSeoExtension extends Extension
         if (count($sonataBundles) && $config['sonata_admin_extension']['enabled']) {
             $this->loadSonataAdmin($config['sonata_admin_extension'], $loader, $container, $sonataBundles);
         }
+
+        if ($config['mapping']) {
+            $this->loadMetadataMapping($config['mapping'], $loader, $container);
+        }
     }
 
     /**
@@ -130,5 +134,18 @@ class CmfSeoExtension extends Extension
     public function getXsdValidationBasePath()
     {
         return __DIR__.'/../Resources/config/schema';
+    }
+
+    /**
+     * Loads the config for mapping. Get the resources where to find
+     * mapping.
+     *
+     * @param $config
+     * @param XmlFileLoader $loader
+     * @param $container
+     */
+    private function loadMetadataMapping($config, XmlFileLoader $loader, $container)
+    {
+        $loader->load('mapping.xml');
     }
 }
