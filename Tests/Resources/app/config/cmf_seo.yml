@@ -14,7 +14,13 @@ cmf_seo:
     error:
         enable_parent_provider: true
         enable_sibling_provider: true
-    sitemap: true
+    sitemap:
+        configurations:
+            default:
+                default_change_frequency: never
+                templates:
+                    xml: 'CmfSeoBundle:Sitemap:index.xml.twig'
+                    html: 'CmfSeoBundle:Sitemap:index.html.twig'
 
 cmf_routing:
     chain:
