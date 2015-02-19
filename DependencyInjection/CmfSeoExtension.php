@@ -202,7 +202,7 @@ class CmfSeoExtension extends Extension
                     array($alternateLocaleProviderDefinition)
                 );
             $container
-                ->findDefinition('cmf_seo.sitemap.phpcr_provider')
+                ->findDefinition('cmf_seo.sitemap.phpcr_simple_guesser')
                 ->addMethodCall(
                     'setAlternateLocaleProvider',
                     array($alternateLocaleProviderDefinition)
