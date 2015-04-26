@@ -22,18 +22,17 @@ matrix:
       env: SYMFONY_VERSION=3.0.*
   allow_failures:
     - php: 5.6
-      env: SYMFONY_VERSION=2.7.*
-    - php: 5.6
       env: SYMFONY_VERSION=3.0.*
 
-before_script:
+before_install:
   - composer self-update
   - if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then echo "memory_limit = -1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi
-  - composer require symfony/symfony:${SYMFONY_VERSION} --prefer-source
-  - vendor/symfony-cmf/testing/bin/travis/phpcr_odm_doctrine_dbal.sh
 
+install: composer require symfony/symfony:${SYMFONY_VERSION} --prefer-source
 
-script: phpunit --coverage-text
+before_script: vendor/symfony-cmf/testing/bin/travis/phpcr_odm_doctrine_dbal.sh
+
+script: export SYMFONY_DEPRECATIONS_HELPER=weak; phpunit --coverage-text
 
 notifications:
   irc: "irc.freenode.org#symfony-cmf"
